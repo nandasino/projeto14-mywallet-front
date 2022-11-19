@@ -1,7 +1,7 @@
 import styled from "styled-components";
 export default function Carteira(){
     return(
-        <>
+        <Tela>
         <DivOla>
         <h1>Olá, Fulano</h1>
         <ion-icon name="log-out-outline"></ion-icon>
@@ -19,9 +19,18 @@ export default function Carteira(){
                 Nova<br/>saída
             </Item>
         </DivAdiciona>
-        </>
+        </Tela>
     )
 }
+const Tela = styled.div`
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    background-color: #8c11be;
+    font-family: 'Raleway';
+`
 const DivOla =styled.div`
     width:90%;
     height: 31px;
@@ -29,6 +38,7 @@ const DivOla =styled.div`
     justify-content: space-between;
     align-items: center;
     margin-bottom:22px;
+    padding-top:25px;
     h1{
         font-style: normal;
         font-weight: 700;
@@ -43,7 +53,7 @@ const DivOla =styled.div`
 `
 const ContainerCarteira = styled.div`
     width:90%;
-    min-height: 446px;
+    min-height: 60vh;
     background: #FFFFFF;
     border-radius: 5px;
     display:flex;

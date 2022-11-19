@@ -47,6 +47,11 @@ const LoginContainer= styled.div`
     display:flex;
     flex-direction:column;
     align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width:100%;
+    background-color: #8c11be;
+    font-family: 'Raleway';
     h1{
         font-family: 'Saira Stencil One';
         font-style: normal;
