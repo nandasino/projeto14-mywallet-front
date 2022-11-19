@@ -2,22 +2,30 @@ import styled from "styled-components";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Login(){
-    const [loginUsuario, setLoginUsuario] = useState({});
-    
+export default function Cadastro(){
+    const [cadastroUsuario, setCadastroUsuario] = useState({});
+
     function enviaForm(){
         console.log("enviado");
     }
     function atualizaImput(e) {
-        setLoginUsuario({
-            ...loginUsuario,
+        setCadastroUsuario({
+            ...cadastroUsuario,
             [e.target.name]: e.target.value
         })
       }
     return(
-        <LoginContainer>
+        <CadastroContainer>
         <h1>MyWallet</h1>
         <form onSubmit={enviaForm}>
+            <input
+            name= "name"
+            type= "text"
+            placeholder= "Nome"
+            autoComplete="off"
+            required
+            onChange={atualizaImput}
+            />
             <input
             name= "email"
             type= "email"
@@ -34,14 +42,21 @@ export default function Login(){
             autoComplete="off"
             onChange={atualizaImput}
             />
-            <button type="submit">Entrar</button>
+            <input
+            name= "check"
+            type= "password"
+            placeholder= "Confirme a senha"
+            required
+            autoComplete="off"
+            onChange={atualizaImput}
+            />
+            <button type="submit">Cadastrar</button>
         </form>
-        <Link to={`/cadastro`}><p>Primeira vez? Cadastre-se!</p></Link>
-        </LoginContainer>
+        <Link to={`/`}><p>Já tem uma conta? Entre agora!</p></Link>
+        </CadastroContainer>
     )
 }
-
-const LoginContainer= styled.div`
+const CadastroContainer= styled.div`
     display:flex;
     flex-direction:column;
     align-items: center;
