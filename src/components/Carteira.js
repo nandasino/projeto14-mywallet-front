@@ -1,22 +1,27 @@
 import styled from "styled-components";
+import {Link} from "react-router-dom";
 export default function Carteira(){
     return(
         <Tela>
         <DivOla>
         <h1>Olá, Fulano</h1>
-        <ion-icon name="log-out-outline"></ion-icon>
+        <Link to={`/`}><ion-icon name="log-out-outline"></ion-icon></Link>
         </DivOla>
         <ContainerCarteira>
         <p>Não há registros de <br/>entrada ou saída</p>
         </ContainerCarteira>
         <DivAdiciona>
-            <Item>
-            <ion-icon name="add-circle-outline"></ion-icon>
-                Nova<br/>entrada
+            <Item >
+                <Link to={`/entrada`}>
+                    <ion-icon name="add-circle-outline"></ion-icon>
+                </Link>
+                <Link to={`/entrada`}>
+                    Nova<br/>entrada
+                </Link>
             </Item>
             <Item>
-            <ion-icon name="remove-circle-outline"></ion-icon>
-                Nova<br/>saída
+                <Link to={`/saida`}><ion-icon name="remove-circle-outline"></ion-icon></Link>
+                <Link to= {`/saida`}>Nova<br/>saída</Link>
             </Item>
         </DivAdiciona>
         </Tela>
