@@ -2,84 +2,61 @@ import styled from "styled-components";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Cadastro(){
-    const [cadastroUsuario, setCadastroUsuario] = useState({});
+export default function Entrada(){
+    const [enviaEntrada, setEnviaEntrada] = useState({});
     const navigate = useNavigate();
-    
+
     function enviaForm(){
         console.log("enviado");
+        navigate("/carteira");
     }
     function atualizaImput(e) {
-        setCadastroUsuario({
-            ...cadastroUsuario,
+        setEnviaEntrada({
+            ...enviaEntrada,
             [e.target.name]: e.target.value
         })
       }
+
     return(
-        <CadastroContainer>
-        <h1>MyWallet</h1>
+        <Tela>
+            <DivTitulo><h1>Nova entrada</h1></DivTitulo>
         <form onSubmit={enviaForm}>
             <input
-            name= "name"
-            type= "text"
-            placeholder= "Nome"
+            name= "value"
+            type= "number"
+            placeholder= "Valor"
             autoComplete="off"
             required
             onChange={atualizaImput}
             />
             <input
-            name= "email"
-            type= "email"
-            placeholder= "E-mail"
-            autoComplete="off"
-            required
-            onChange={atualizaImput}
-            />
-            <input
-            name= "password"
-            type="password"
-            placeholder= "Senha"
+            name= "description"
+            type="text"
+            placeholder= "Descrição"
             required
             autoComplete="off"
             onChange={atualizaImput}
             />
-            <input
-            name= "check"
-            type= "password"
-            placeholder= "Confirme a senha"
-            required
-            autoComplete="off"
-            onChange={atualizaImput}
-            />
-            <button type="submit">Cadastrar</button>
+            <button type="submit">Salvar entrada</button>
         </form>
-        <Link to={`/`}><p>Já tem uma conta? Entre agora!</p></Link>
-        </CadastroContainer>
+        </Tela>
     )
 }
-const CadastroContainer= styled.div`
-    display:flex;
+const Tela = styled.div`
+    height: 100vh;
+    width: 100vw;
+    display: flex;
     flex-direction:column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
-    width:100%;
     background-color: #8c11be;
     font-family: 'Raleway';
-    h1{
-        font-family: 'Saira Stencil One';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 32px;
-        line-height: 50px; 
-        color: #FFFFFF;   
-        margin-bottom:24px;    
-    }
+
     form{
         display: flex;
         flex-direction:column;
         margin-bottom: 36px;
     }
+
     input {
         padding-left: 10px;
         width: 326px;
@@ -106,11 +83,18 @@ const CadastroContainer= styled.div`
         cursor:pointer;
         border-radius: 5px;
       }
-      p{
+`
+const DivTitulo =styled.div`
+    width:90%;
+    height: 31px;
+    display:flex;
+    align-items: center;
+    margin-bottom:40px;
+    padding-top:25px;
+    h1{
         font-style: normal;
         font-weight: 700;
-        font-size: 15px;
-        line-height: 18px;
+        font-size: 26px;
+        line-height: 31px;  
         color: #FFFFFF;
-      }
-`
+    }`

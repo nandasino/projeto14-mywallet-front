@@ -90,6 +90,7 @@ const LoginContainer= styled.div`
         line-height: 23px;
         color: #FFFFFF;
         cursor:pointer;
+        border-radius: 5px;
       }
       p{
         font-style: normal;
