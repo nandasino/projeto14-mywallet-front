@@ -17,7 +17,7 @@ export default function Login({setToken,setNome}){
             setNome(res.data.name)
             navigate("/carteira");
         })
-        promise.catch((err)=> alert(err.response.data.message))
+        promise.catch((err)=> alert("insira os dados corretamente"))
     }
 
     function atualizaImput(e) {

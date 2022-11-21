@@ -17,7 +17,8 @@ export default function Cadastro(){
             navigate("/");
         })
         promise.catch((err)=>{
-            alert(err.response.data.message)
+            console.log(err.response.data.message)
+            alert("insira os dados corretamente");
         })
     }
     function atualizaImput(e) {
