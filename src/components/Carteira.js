@@ -1,6 +1,27 @@
 import styled from "styled-components";
 import {Link} from "react-router-dom";
-export default function Carteira(){
+import axios from "axios"
+import { useEffect, useState } from "react";
+
+export default function Carteira({token}){
+    const [transacoes, setTransacoes]= useState([]);
+    useEffect(()=>{
+        const URL = "http://localhost:5000/carteira"
+        const config = {
+            headers: {
+                authorization: `Bearer ${token}` 
+            }
+        }
+
+        const promise = axios.get(URL, config)
+
+        promise.then((res)=>{
+            setTransacoes(res.data);
+        })
+        promise.catch((err)=>{
+            alert(err.response.data.message)
+        })
+    },[])
     return(
         <Tela>
         <DivOla>
@@ -8,7 +29,11 @@ export default function Carteira(){
         <Link to={`/`}><ion-icon name="log-out-outline"></ion-icon></Link>
         </DivOla>
         <ContainerCarteira>
+        {transacoes.length===0?
         <p>Não há registros de <br/>entrada ou saída</p>
+        : 
+        <Transacoes>{transacoes.map((t) => <Transacao><div><p className="day">{t.day}</p><p className="description">{t.description}</p> </div><p className={t.type==="saida"?"vermelho":"verde"}>{t.value}</p></Transacao>)}</Transacoes>
+        }
         </ContainerCarteira>
         <DivAdiciona>
             <Item >
@@ -101,5 +126,34 @@ const Item = styled.div`
     ion-icon{
         color: #FFFFFF;
         font-size: 26px;
+    }
+`
+const Transacoes= styled.div`
+    width:100%;
+    min-height: 60vh;
+    display:flex;
+    flex-direction:column;
+`
+const Transacao = styled.div`
+    width: 100%;
+    display:flex;
+    justify-content:space-between;
+    padding: 15px;
+    box-sizing:border-box;
+    div{
+        width:80%;
+        display:flex;
+    }
+    .day{
+    }
+    .description{
+        margin-left:10px;
+        color: #000000;
+    }
+    .verde{
+        color:green;
+    }
+    .vermelho{
+        color:red;
     }
 `

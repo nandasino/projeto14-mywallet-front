@@ -1,13 +1,24 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Cadastro(){
     const [cadastroUsuario, setCadastroUsuario] = useState({});
     const navigate = useNavigate();
     
-    function enviaForm(){
-        console.log("enviado");
+    function enviaForm(e){
+        e.preventDefault();
+        const URL= "http://localhost:5000/cadastro"
+        const body = {...cadastroUsuario}
+        const promise = axios.post(URL, body)
+        promise.then((res)=>{
+            console.log(res.data)
+            navigate("/");
+        })
+        promise.catch((err)=>{
+            alert(err.response.data.message)
+        })
     }
     function atualizaImput(e) {
         setCadastroUsuario({

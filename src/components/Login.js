@@ -1,15 +1,24 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
-export default function Login(){
+export default function Login({setToken}){
     const [loginUsuario, setLoginUsuario] = useState({});
     const navigate = useNavigate();
     
-    function enviaForm(){
-        console.log("enviado");
-        navigate("/carteira");
+    function enviaForm(e){
+        const URL= "http://localhost:5000/"
+        const body = {...loginUsuario}
+        const promise = axios.post(URL, body)
+        e.preventDefault();
+        promise.then((res)=>{
+            setToken(res.data.token)
+            navigate("/carteira");
+        })
+        promise.catch((err)=> alert(err.response.data.message))
     }
+
     function atualizaImput(e) {
         setLoginUsuario({
             ...loginUsuario,
