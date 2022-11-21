@@ -53,13 +53,13 @@ export default function Carteira({token, nome}){
     )
 }
 const Tela = styled.div`
-    height: 100vh;
     width: 100vw;
     display: flex;
     flex-direction:column;
     align-items: center;
     background-color: #8c11be;
     font-family: 'Raleway';
+    padding-bottom: 10vh;
 `
 const DivOla =styled.div`
     width:90%;
