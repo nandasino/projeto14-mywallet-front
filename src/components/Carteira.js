@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 
 export default function Carteira({token, nome}){
     const [transacoes, setTransacoes]= useState([]);
+    const [soma, setSoma] = useState(0.0);
+
     useEffect(()=>{
         const URL = "http://localhost:5000/carteira"
         const config = {
@@ -17,6 +19,15 @@ export default function Carteira({token, nome}){
 
         promise.then((res)=>{
             setTransacoes(res.data);
+            let soma = 0;
+            res.data.forEach((each) => {
+                if (each.type === "entrada") {
+                  soma += parseFloat(each.value);
+                } else {
+                  soma -= parseFloat(each.value);
+                }
+              });
+              setSoma(soma);
         })
         promise.catch((err)=>{
             alert(err.response.data.message)
@@ -32,7 +43,21 @@ export default function Carteira({token, nome}){
         {transacoes.length===0?
         <p>Não há registros de <br/>entrada ou saída</p>
         : 
-        <Transacoes>{transacoes.map((t) => <Transacao><div><p className="day">{t.day}</p><p className="description">{t.description}</p> </div><p className={t.type==="saida"?"vermelho":"verde"}>{t.value}</p></Transacao>)}</Transacoes>
+        <Transacoes>
+            {transacoes.map((t) => 
+            <Transacao>
+                <div>
+                    <p className="day">{t.day}</p>
+                    <p className="description">{t.description}</p> 
+                </div>
+                <p className={t.type==="saida"?"vermelho":"verde"}>{t.value}</p>
+            </Transacao>)
+            }
+            <Transacao>
+                <p className="saldo">SALDO</p>
+                <p className={soma<0?"vermelho": "verde"}>{soma}</p>
+            </Transacao> 
+        </Transacoes>
         }
         </ContainerCarteira>
         <DivAdiciona>
@@ -156,4 +181,12 @@ const Transacao = styled.div`
     .vermelho{
         color:red;
     }
+    .saldo{
+        font-style: normal;
+        font-weight: 700 !important;
+        font-size: 17px;
+        line-height: 20px;
+        color: #000000;
+    }
 `
+
