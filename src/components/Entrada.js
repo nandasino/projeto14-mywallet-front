@@ -1,14 +1,29 @@
 import styled from "styled-components";
 import { useState } from "react";
 import {useNavigate } from "react-router-dom";
+import axios from "axios";
 
-export default function Entrada(){
+export default function Entrada({token}){
     const [enviaEntrada, setEnviaEntrada] = useState({});
     const navigate = useNavigate();
 
-    function enviaForm(){
-        console.log("enviado");
-        navigate("/carteira");
+    function enviaForm(e){
+        e.preventDefault();
+        const URL= "http://localhost:5000/entrada"
+        const body = {...enviaEntrada}
+        const config = {
+            headers: {
+                authorization: `Bearer ${token}` 
+            }
+        }
+        const promise = axios.post(URL, body, config)
+        promise.then((res)=>{
+            console.log(res.data)
+            navigate("/carteira");
+        })
+        promise.catch((err)=>{
+            alert(err.response.data.message)
+        })
     }
     function atualizaImput(e) {
         setEnviaEntrada({
