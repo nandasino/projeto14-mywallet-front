@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import axios from "axios"
 import { useEffect, useState } from "react";
 
-export default function Carteira({token}){
+export default function Carteira({token, nome}){
     const [transacoes, setTransacoes]= useState([]);
     useEffect(()=>{
         const URL = "http://localhost:5000/carteira"
@@ -25,7 +25,7 @@ export default function Carteira({token}){
     return(
         <Tela>
         <DivOla>
-        <h1>Olá, Fulano</h1>
+        <h1>Olá, {nome}</h1>
         <Link to={`/`}><ion-icon name="log-out-outline"></ion-icon></Link>
         </DivOla>
         <ContainerCarteira>

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-export default function Login({setToken}){
+export default function Login({setToken,setNome}){
     const [loginUsuario, setLoginUsuario] = useState({});
     const navigate = useNavigate();
     
@@ -14,6 +14,7 @@ export default function Login({setToken}){
         e.preventDefault();
         promise.then((res)=>{
             setToken(res.data.token)
+            setNome(res.data.name)
             navigate("/carteira");
         })
         promise.catch((err)=> alert(err.response.data.message))

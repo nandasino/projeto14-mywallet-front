@@ -10,14 +10,15 @@ import { useState } from "react";
 
 export default function App(){
     const [token, setToken]= useState(null);
+    const [nome, setNome] = useState("Fulano")
     return(
         <>
         <GlobalStyle/>
         <BrowserRouter>
         <Routes>
-            <Route path="/" element={<Login setToken={setToken}/>}/>
+            <Route path="/" element={<Login setToken={setToken} setNome={setNome}/>}/>
             <Route path="/cadastro" element={<Cadastro/>}/>
-            <Route path="/carteira" element= {<Carteira token={token}/>}/>
+            <Route path="/carteira" element= {<Carteira token={token} nome={nome}/>}/>
             <Route path="/entrada" element={<Entrada/>}/>
             <Route path="/saida" element={<Saida/>}/>
         </Routes>
