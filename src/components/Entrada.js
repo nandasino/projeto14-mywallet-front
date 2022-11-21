@@ -39,6 +39,7 @@ export default function Entrada({token}){
             <input
             name= "value"
             type= "number"
+            step="any"
             placeholder= "Valor"
             autoComplete="off"
             required
